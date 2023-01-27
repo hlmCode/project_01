@@ -1,0 +1,6 @@
+# 忽略当前目录下的 .idea
+/.idea
+# 忽略当前目录下的 target
+/target
+# 忽略当前目录下的 .schooldorm.iml
+/schooldorm.iml

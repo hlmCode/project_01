@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.UserMapper">
+    <resultMap id="userResultMap" type="com.itheima.pojo.User">
+        <result property="userName" column="user_name"/>
+        <result property="userPassword" column="user_password"/>
+    </resultMap>
+
+    <!--    登录-->
+    <select id="login" resultType="com.itheima.pojo.User">
+        select id, user_name as userName, user_password as userPassword, name, gender, phone, type
+        from user
+        where
+            user_name = #{userName} and
+            user_password = #{userPassword} and
+            type = #{type};
+    </select>
+
+    <!--    查询所有宿管-->
+    <select id="selectAll" resultMap="userResultMap">
+        select * from user where type = '1';
+    </select>
+
+    <!--    分页查询-->
+    <select id="selectPage" resultMap="userResultMap">
+        select *
+        from user
+        <where>
+            <if test="user.gender != null and user.gender != ''">
+                and gender = #{user.gender}
+            </if>
+            <if test="user.name != null and user.name != ''">
+                and name like #{user.name}
+            </if>
+            <if test="user.phone != null and user.phone != ''">
+                and phone like #{user.phone}
+            </if>
+            and type = 1
+        </where>
+        limit #{begin} , #{size};
+    </select>
+
+    <!--    查询总记录数-->
+    <select id="selectTotalCount" resultType="java.lang.Integer">
+        select count(*)
+        from user
+        <where>
+            <if test="user.gender != null and user.gender != ''">
+                and gender = #{user.gender}
+            </if>
+            <if test="user.name != null and user.name != ''">
+                and name like #{user.name}
+            </if>
+            <if test="user.phone != null and user.phone != ''">
+                and phone like #{user.phone}
+            </if>
+            and type = 1
+        </where>
+    </select>
+
+    <!--    查询是否存在此用户名-->
+    <select id="selectByuserName" resultMap="userResultMap">
+        select *
+        from user where user_name = #{userName};
+    </select>
+
+    <!--    新增宿管-->
+    <insert id="add">
+        insert into user
+        values (null, #{userName}, #{userPassword}, #{name}, #{gender}, #{phone}, #{type});
+    </insert>
+
+    <!--    根据id删除-->
+    <delete id="deleteById">
+        delete
+        from user
+        where id = #{id};
+    </delete>
+
+    <!--    根据id修改数据-->
+    <update id="updateById">
+        update user
+        set user_name = #{userName},
+            user_password = #{userPassword},
+            name = #{name},
+            gender = #{gender},
+            phone = #{phone}
+        where
+              id = #{id};
+    </update>
+
+    <!--    根据id数组进行多条删除-->
+    <delete id="deleteByIds">
+        delete
+        from user
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>;
+    </delete>
+</mapper>

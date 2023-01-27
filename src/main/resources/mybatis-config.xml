@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <package name="com.itheima.pojo"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <!--加载驱动-->
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <!--连接地址-->
+                    <!--useSSL=false:关闭安全连接-->
+                    <!--useUnicode=true&characterEncoding=UTF-8:解决中文乱码-->
+                    <!--useServerPrepStmts=true:开启sql预编译-->
+                    <!--cachePrepStmts=true:启用服务端预编译缓存
+                        虽然预编译执行发送到了mysql服务端，但是两个一样的sql会编译两次，这个时候就需要增加预编译缓存了-->
+                <property name="url" value="jdbc:mysql:///school?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;useServerPrepStmts=true&amp;cachePrepStmts=true"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--映射文件地址-->
+    <mappers>
+        <!--包扫描，这样就不用一个文件一个文件的去填写了-->
+        <package name="com.itheima.mapper"/>
+    </mappers>
+</configuration>

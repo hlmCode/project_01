@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./less/index.css">
+    <title>Document</title>
+</head>
+<!--宿舍管理-->
+<body>
+    <div id="app">
+        <table border="0" cellspacing="0" cellpadding="0">
+            <tr id="topper">+
+                +
+                <td id="person">
+                    <div class="bio">
+                        <p>管理员</p>
+                        <div><i class="el-icon-s-custom"></i></div>
+                        <span>蔡徐坤</span>
+                    </div>
+                </td>
+                <td>
+                    <div id="topone">
+                        <div>宿舍管理系统</div>
+                        <div><a href="./init.html" target="isframe"><i class="el-icon-female"></i>首页</a></div>
+                        <div><i class="el-icon-aim">安全退出</i></div>
+                    </div>
+                    <div id="toptwo">
+                        <span id="date" class="el-icon-timer"></span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr id="conter">
+                <td id="left">
+                    <ul id="nav">
+                        <!--<li class="li">
+                            <i class="el-icon-user-solid"></i>学生管理<i class="el-icon-arrow-down"></i>
+                        </li>
+                        <ul class="subtitle">
+                            <li>
+                                <a href="./dorm.html" target="isframe">新生报到</a>
+                            </li>
+                            <li>
+                                <a href="" target="isframe">学生升级</a>
+                            </li>
+                            <li>
+                                <a href="" target="isframe">编辑学生</a>
+                            </li>
+                        </ul>
+
+
+                        <li class="li">
+                            <i class="el-icon-more"></i>班级管理<i class="el-icon-arrow-down"></i>
+                        </li>
+                        <ul class="subtitle">
+                            <li>
+                                <a href="" target="isframe">辅导员管理</a>
+                            </li>
+                            <li>
+                                <a href="" target="isframe">班级管理</a>
+                            </li>
+                        </ul>-->
+
+
+                        <li class="li">
+                            <i class="el-icon-s-home"></i>管理系统<i class="el-icon-arrow-down"></i>
+                        </li>
+                        <ul class="subtitle">
+                            <li>
+                                <a href="./dorm.html" target="isframe">宿管管理</a>
+                            </li>
+                            <li>
+                                <a href="./student.html" target="isframe">学生管理</a>
+                            </li>
+                            <li>
+                                <a href="" target="isframe">楼宇管理</a>
+                            </li>
+                            <li>
+                                <a href="" target="isframe">宿舍管理</a>
+                            </li>
+                            <li>
+                                <a href="" target="isframe">学生迁出登记</a>
+                            </li>
+                            <li>
+                                <a href="" target="isframe">学生迁出记录</a>
+                            </li>
+                            <li>
+                                <a href="" target="isframe">学生缺寝记录</a>
+                            </li>
+                        </ul>
+
+                        <li class="li">
+                            <i class="el-icon-switch-button"></i>
+                            退出登录
+                        </li>
+                    </ul>
+                </td>
+                <td id="right">
+                    <iframe name="isframe" src="./init.html" frameborder="0" width="100%" height="100%"></iframe>
+                </td>
+            </tr>
+
+            <tr id="button">
+                <td colspan="2">
+                    <div id="tail">
+                        <span></span>
+                        <span></span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+<script src="./js/jquery.js"></script>
+<script src="./js/vue.js"></script>
+<script src="./element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="./element-ui/lib/theme-chalk/index.css">
+
+<script>
+    new Vue({
+        el: "#app"
+    })
+
+
+    var li = document.querySelectorAll(".li");
+    var subtitle = document.querySelectorAll(".subtitle");
+    var a = document.querySelector("#nav").querySelectorAll("a");
+    console.log(a);
+    for (let i = 0; i < li.length; i++) {
+        li[i].addEventListener("click", function () {
+            var s = subtitle[i];
+            $(s).slideToggle();
+        })
+    }
+
+    var titlei = '<i class="el-icon-right"></i>';
+    for(let i = 0;i<subtitle.length;i++){
+        subtitle[i].addEventListener("click",function(e){
+            console.log(e.target);
+            for(let k = 0;k<a.length;k++){
+                a[k].classList.remove("back");
+                a[k].classList.remove("el-icon-right");
+            }
+            e.target.classList.add("back");
+            e.target.classList.add("el-icon-right");
+        })
+    }
+
+
+    var d = document.querySelector("#date");
+    function getdate() {
+        var date = new Date();
+        var year = date.getFullYear(); // 获取年
+        var month = date.getMonth() + 1; // 获取月
+        var day = date.getDate();   // 获取日期
+        var hours = date.getHours();    // 获取小时
+        var minutes = date.getMinutes(); // 获取分钟
+        var seconds = date.getSeconds(); // 获取秒
+        var day = date.getDay(); // 获取星期
+        var dayarrays = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+        var dateindex = year + "年" + month + "月" + day + "日  " + hours + "时" + minutes + "分" + seconds + "秒  " + dayarrays[day];
+        d.innerText = dateindex;
+    }
+    getdate();
+    setInterval(() => {
+        getdate();
+    }, 1000);
+</script>
+
+</html>

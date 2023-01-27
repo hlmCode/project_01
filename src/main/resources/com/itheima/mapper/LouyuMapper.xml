@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.LouyuMapper">
+    <resultMap id="LouyuResultMap" type="com.itheima.pojo.Louyu">
+<!--        楼宇关联的宿管id-->
+        <result property="userId" column="user_id" />
+    </resultMap>
+
+    <!--    条件分页查询-->
+    <select id="selectPage" resultMap="LouyuResultMap">
+        select
+            A.id,
+            A.name,
+            A.brief,
+            A.gender,
+            A.user_id,
+            B.id as uid,
+            B.user_name as userName,
+            B.user_password as userPassword,
+            B.name as uname,
+            B.gender as ugender,
+            B.phone,
+            B.type
+        from louyu A , user B
+        <where>
+                and A.user_id = B.id
+            <if test="louyu.name != null and louyu.name != ''">
+                and A.name like #{louyu.name}
+            </if>
+            <if test="louyu.brief != null and louyu.brief != ''">
+                and A.brief like #{louyu.brief}
+            </if>
+            <if test="louyu.gender != null and louyu.gender != ''">
+                and A.gender = #{louyu.gender}
+            </if>
+        </where>
+        limit #{begin},#{size};
+    </select>
+<!--    条件查询总条数-->
+    <select id="selectTotalCount" resultType="java.lang.Integer">
+        select count(*)
+        from louyu
+        <where>
+            <if test="louyu.name != null and louyu.name != ''">
+                and name like #{louyu.name}
+            </if>
+            <if test="louyu.brief != null and louyu.brief != ''">
+                and brief like #{louyu.brief}
+            </if>
+            <if test="louyu.gender != null and louyu.gender != ''">
+                and gender = #{louyu.gender}
+            </if>
+        </where>
+    </select>
+
+<!--    获取user的数据-->
+    <select id="selectByUser" resultType="com.itheima.pojo.User">
+        select
+            id,
+            name
+        from user where type = '1';
+    </select>
+
+    <!--    添加楼宇-->
+    <insert id="add">
+        insert into louyu
+        values (null,#{name},#{brief},#{gender},#{userId});
+    </insert>
+
+<!--    根据id进行修改-->
+    <update id="updateId">
+        update louyu
+        set
+            name = #{name},
+            brief = #{brief},
+            gender = #{gender},
+            user_id = #{userId}
+            where id = #{id};
+    </update>
+
+<!--    根据楼宇编号查询是否重复-->
+    <select id="selectByName" resultMap="LouyuResultMap">
+        select *
+        from louyu where name = #{name};
+    </select>
+</mapper>

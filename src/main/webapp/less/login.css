@@ -1,0 +1,82 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: url(../imgs/Desert1.jpg) no-repeat;
+  background-size: 100vw 100vh;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#app {
+  width: 38.23529412vw;
+  height: 23.52941176vw;
+  background-color: rgba(75, 81, 95, 0.3);
+  box-shadow: 0.41176471vw 0.41176471vw 1vw rgba(52, 56, 66, 0.5);
+  border-radius: 0.35294118vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#loginMsg {
+  text-align: center;
+  color: aliceblue;
+  padding-bottom: 1.76470588vw;
+}
+#form input[type="text"],
+#form input[type="password"] {
+  width: 15.76470588vw;
+  line-height: 1.76470588vw;
+  font-size: 0.94117647vw;
+  outline: none;
+  border: none;
+  border-radius: 0.29411765vw;
+  padding-left: 0.58823529vw;
+  color: #f0edf3;
+  background-color: rgba(216, 191, 216, 0.5);
+}
+#form input[type="radio"] {
+  margin-right: 0.29411765vw;
+}
+#form label {
+  padding-left: 0.88235294vw;
+  color: #f0edf3;
+  font-size: 0.94117647vw;
+  letter-spacing: 0.17647059vw;
+  cursor: pointer;
+}
+#form input[type="submit"],
+#form input[type="reset"] {
+  display: inline-block;
+  width: 5vw;
+  height: 2.64705882vw;
+  margin-right: 0.88235294vw;
+  background-color: #ae2535;
+  border: none;
+  color: #f0edf3;
+  border-radius: 0.23529412vw;
+  font-size: 0.94117647vw;
+  letter-spacing: 0.17647059vw;
+  cursor: pointer;
+}
+#form input[type="submit"] {
+  background-color: #2155ce;
+}
+table tr {
+  line-height: 2.94117647vw;
+}
+table tr td:first-child {
+  font-size: 1.05882353vw;
+  color: white;
+  letter-spacing: 0.05882353vw;
+  padding-right: 0.88235294vw;
+}

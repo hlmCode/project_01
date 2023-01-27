@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.DormMapper">
+    <resultMap id="DormResultMap" type="com.itheima.pojo.Dorm">
+        <result property="lid" column="louyu_id"></result>
+        <result property="roomName" column="room_name"></result>
+        <result property="roomNumber" column="room_number"></result>
+        <result property="roomSpare" column="room_spare"></result>
+    </resultMap>
+<!--    分页条件查询-->
+    <select id="selectPage" resultType="com.itheima.pojo.Dorm">
+        select
+            d.id,
+            d.louyu_id as lid,
+            l.user_id as uid,
+            l.name as lname,
+            l.brief as lbrief,
+            l.gender as lgender,
+            d.room_name as roomName,
+            d.room_number as roomNumber,
+            d.room_spare as roomSpare,
+            u.name as uname,
+            u.phone as uphone
+        from dorm d,
+             louyu l,
+             user u
+        <where>
+            and d.louyu_id = l.id
+            and l.user_id = u.id
+            and d.louyu_id
+            and d.louyu_id
+                in (
+                    select id
+                    from louyu
+                    <where>
+                        <if test="dorm.lname != null and dorm.lname != ''">
+                            and name like #{dorm.lname}
+                        </if>
+                        <if test="dorm.lbrief != null and dorm.lbrief != ''">
+                            and brief like #{dorm.lbrief}
+                        </if>
+                        <if test="dorm.lgender != null and dorm.lgender != ''">
+                            and gender = #{dorm.lgender}
+                        </if>
+                    </where>
+                )
+        </where>
+        limit #{begin},#{size};
+
+    </select>
+
+<!--    条件查询总条数-->
+    <select id="selectTotalCount" resultType="java.lang.Integer">
+        select count(*)
+        from dorm d,
+        louyu l,
+        user u
+        <where>
+            and d.louyu_id = l.id
+            and l.user_id = u.id
+            and d.louyu_id
+            and d.louyu_id
+            in (
+            select id
+            from louyu
+            <where>
+                <if test="dorm.lname != null and dorm.lname != ''">
+                    and name like #{dorm.lname}
+                </if>
+                <if test="dorm.lbrief != null and dorm.lbrief != ''">
+                    and name like #{dorm.lbrief}
+                </if>
+                <if test="dorm.lgender != null and dorm.lgender != ''">
+                    and name = #{dorm.lgender}
+                </if>
+            </where>
+            )
+        </where>
+    </select>
+
+
+</mapper>
