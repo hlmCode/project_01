@@ -100,7 +100,7 @@
                                 <a href="./dorm.html" target="isframe">宿管管理</a>
                             </li>
                             <li>
-                                <a href="./student.html" target="isframe">学生管理</a>
+                                <a href="./test.html" target="isframe">学生管理</a>
                             </li>
                             <li>
                                 <a href="./louyu.html" target="isframe">楼宇管理</a>
