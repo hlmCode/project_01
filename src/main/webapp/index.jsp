@@ -111,13 +111,13 @@
                         </c:if>
                         <c:if test="${user.type == 1 || user.type == 2}">
                             <li>
-                                <a href="" target="isframe">学生迁出登记</a>
+                                <a href="./test.html" target="isframe">学生迁出登记</a>
                             </li>
                             <li>
-                                <a href="" target="isframe">学生迁出记录</a>
+                                <a href="./test.html" target="isframe">学生迁出记录</a>
                             </li>
                             <li>
-                                <a href="" target="isframe">学生缺寝记录</a>
+                                <a href="./test.html" target="isframe">学生缺寝记录</a>
                             </li>
                         </c:if>
                     </ul>
